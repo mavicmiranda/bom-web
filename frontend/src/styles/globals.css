@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @tailwind theme; */
+@reference "tailwindcss";
+
+
+/* reset básico */
+body {
+  background-color: #13131b;
+  color: #e4e1ed;
+  font-family: "Inter", sans-serif;
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-md;
+}
+
+.border-outline {
+  @apply border-gray-300;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #cbbeff 0%, #967ef7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-glow {
+  background: radial-gradient(
+    circle at center,
+    rgba(150, 126, 247, 0.15),
+    transparent 70%
+  );
+}
+
+.kanban-3d {
+  transform: perspective(1000px) rotateX(10deg) rotateY(-5deg);
+}
