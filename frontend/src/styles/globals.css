@@ -1,23 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-/* @tailwind theme; */
-@reference "tailwindcss";
+@import "tailwindcss";
 
 
 /* reset básico */
 body {
-  background-color: #13131b;
-  color: #e4e1ed;
+   background: radial-gradient(
+    circle at top,
+    rgba(139, 92, 246, 0.15),
+    transparent 40%
+  ),
+  #0a0a12;
   font-family: "Inter", sans-serif;
-}
-
-.glass {
-  @apply bg-white/70 backdrop-blur-md;
-}
-
-.border-outline {
-  @apply border-gray-300;
+  margin:0;
 }
 
 .text-gradient {
@@ -36,4 +29,22 @@ body {
 
 .kanban-3d {
   transform: perspective(1000px) rotateX(10deg) rotateY(-5deg);
+}
+
+.btn-ghost {
+  @apply text-white/70 hover:text-white transition-colors duration-200;
+  cursor: pointer;
+}
+
+.btn-primary {
+  @apply px-4 py-2 rounded-full text-sm font-medium text-white transition-all duration-300;
+
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6); 
 }

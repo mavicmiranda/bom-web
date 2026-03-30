@@ -6,7 +6,7 @@ export default {
       colors: {
         primary: "#cbbeff",
         "primary-container": "#967ef7",
-        background: "#13131b",
+        background: "#12121A",
         surface: "#1f1f27",
         "surface-low": "#1b1b23",
         "surface-high": "#292932",

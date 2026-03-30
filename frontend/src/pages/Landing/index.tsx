@@ -1,46 +1,23 @@
 import { useNavigate } from "react-router-dom";
+import BaseCard from "../../components/ui/BaseCard";
+import CenteredContainer from "../../components/layout/CenteredContainer";
 
 export default function Landing() {
   const navigate = useNavigate();
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "white",
-        textAlign: "center",
-      }}
+    <CenteredContainer
     >
-      <div
-        style={{
-          backdropFilter: "blur(12px)",
-          background: "rgba(255,255,255,0.1)",
-          padding: "50px",
-          borderRadius: "20px",
-          maxWidth: "500px",
-        }}
-      >
+     <BaseCard>
         <h1>Job Tracker</h1>
         <p>
           Organize suas candidaturas, acompanhe processos seletivos e aumente
           suas chances de conseguir o emprego ideal.
         </p>
-        <button
-          onClick={() => navigate("/login")}
-          style={{
-            marginTop: "20px",
-            padding: "10px 20px",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-          }}
-        >
+        <button className="btn-primary" onClick={() => navigate("/login")}>
           Começar agora
         </button>
-      </div>
-    </div>
+      </BaseCard>
+    </CenteredContainer>
   );
 }
