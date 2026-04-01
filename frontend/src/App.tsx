@@ -8,6 +8,7 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Register from "./pages/Register";
 
 import { PrivateRoute } from "./routes/PrivateRoute";
 
@@ -16,11 +17,11 @@ export default function AppRoutes() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-
           {/* Rotas públicas */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Route>
 
           {/* Rotas privadas */}
@@ -30,7 +31,6 @@ export default function AppRoutes() {
               <Route path="/profile" element={<Profile />} />
             </Route>
           </Route>
-
         </Routes>
       </BrowserRouter>
     </AuthProvider>

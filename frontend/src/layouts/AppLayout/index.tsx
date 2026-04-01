@@ -4,12 +4,13 @@ import Navbar from "../../components/Navbar";
 
 export default function AppLayout() {
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div className="flex h-screen">
       <Sidebar />
 
-      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        <Navbar variant="app"/>
-            <main>
+      <div className="flex flex-1 flex-col">
+        <Navbar variant="app" />
+
+        <main className="flex-1 overflow-hidden">
           <Outlet />
         </main>
       </div>

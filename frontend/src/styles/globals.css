@@ -48,3 +48,17 @@ body {
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6); 
 }
+
+.sidebar {
+    @apply h-screen text-white p-4 transition-all duration-300 border-r border-white/10;
+    background: rgba(18, 18, 26, 0.6);
+    backdrop-filter: blur(12px);
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all cursor-pointer;
+  }
+
+  .sidebar-item-active {
+    @apply text-white bg-white/10;
+  }

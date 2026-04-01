@@ -5,7 +5,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 export default function FormInput({ label, ...props }: Props) {
   return (
     <div className="flex flex-col gap-1 text-left">
-      <label className="text-xs text-white/60">{label}</label>
+      <label className="text-xs text-white/60 mt-3">{label}</label>
 
       <input
         className="

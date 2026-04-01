@@ -1,103 +1,64 @@
-// import { Link, useLocation } from "react-router-dom";
-// import "./sidebar.css";
-
-// const Sidebar = () => {
-//   const location = useLocation();
-
-//   const menu = [
-//     { name: "Meu Perfil", path: "/profile" },
-//     { name: "Dashboard", path: "/home" },
-//     { name: "Vagas", path: "/jobs" },
-//     { name: "Kanban", path: "/kanban" },
-//   ];
-
-//   return (
-//     <aside style={styles.sidebar}>
-//       <h2 style={styles.logo}>Carreira+</h2>
-
-//       <nav>
-//         {menu.map((item) => {
-//           const isActive = location.pathname === item.path;
-
-//           return (
-//             <Link
-//               key={item.path}
-//               to={item.path}
-//               style={{
-//                 ...styles.link,
-//                 ...(isActive ? styles.active : {}),
-//               }}
-//             >
-//               {item.name}
-//             </Link>
-//           );
-//         })}
-//       </nav>
-//     </aside>
-//   );
-// };
-
-// export default Sidebar;
-
-
-// const styles = {
-//   sidebar: {
-//     width: "240px",
-//     height: "100vh",
-//     background: "#1e1e2f",
-//     color: "#fff",
-//     padding: "20px",
-//     display: "flex",
-//     flexDirection: "column" as const,
-//   },
-//   logo: {
-//     marginBottom: "30px",
-//   },
-//   link: {
-//     display: "block",
-//     padding: "10px",
-//     marginBottom: "10px",
-//     borderRadius: "8px",
-//     textDecoration: "none",
-//     color: "#fff",
-//   },
-//   active: {
-//     background: "#6c63ff", // roxo 🔥
-//   },
-// };
-
 import { useState } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
+import { FiHome, FiUser, FiArrowRight, FiArrowLeft, FiTrendingUp, FiSettings } from "react-icons/fi";
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
 
   return (
-    <aside
-      className={`
-        h-screen bg-zinc-900 text-white p-4
-        transition-all duration-300
-        ${collapsed ? "w-20" : "w-64"}
-      `}
-    >
-      <div className="flex justify-between items-center">
-        <h1 className="font-headline">
+    <aside className= {`sidebar ${collapsed ? "w-20" : "w-64"} flex flex-col h-screen`}>
+      {/* HEADER */}
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="font-headline text-lg text-gradient">
           {collapsed ? "CI" : "Carreira Inteligente"}
         </h1>
 
-        <button onClick={() => setCollapsed(!collapsed)}>
-          {collapsed ? "→" : "←"}
+        <button onClick={() => setCollapsed(!collapsed)} className="btn-ghost">
+          {collapsed ? <FiArrowRight /> : <FiArrowLeft />}
         </button>
       </div>
 
-      <nav className="mt-6 flex flex-col gap-4">
-        <a className="flex gap-3 hover:text-purple-400">
-          🏠 {!collapsed && "Home"}
-        </a>
+      {/* NAV */}
+      <nav className="flex flex-col gap-2">
+        <NavLink
+          to="/home"
+          className={({ isActive }) =>
+            `sidebar-item ${isActive ? "sidebar-item-active" : ""}`
+          }
+        >
+          <FiHome />
+          {!collapsed && <span>Home</span>}
+        </NavLink>
 
-        <a className="flex gap-3 hover:text-purple-400">
-          👤 {!collapsed && "Perfil"}
-        </a>
+        <NavLink
+          to="/profile" onClick={() => navigate("/profile")}
+          className={({ isActive }) =>
+            `sidebar-item ${isActive ? "sidebar-item-active" : ""}` 
+          }
+        >
+          <FiUser />
+          {!collapsed && <span>Perfil</span>}
+        </NavLink>
+
+        <NavLink
+          to="/dashboard"
+          className={({ isActive }) =>
+            `sidebar-item ${isActive ? "sidebar-item-active" : ""}`
+          }
+        >
+          <FiTrendingUp />
+          {!collapsed && <span>Dashboard</span>}
+        </NavLink>
       </nav>
+
+      {/* FOOTER */}
+      <div className="mt-auto pt-6">
+        <div className="sidebar-item">
+          <FiSettings />
+          {!collapsed && <span>Configurações</span>}
+        </div>
+      </div>
     </aside>
   );
 }

@@ -14,7 +14,7 @@ export default function Landing() {
           Organize suas candidaturas, acompanhe processos seletivos e aumente
           suas chances de conseguir o emprego ideal.
         </p>
-        <button className="btn-primary" onClick={() => navigate("/login")}>
+        <button className="btn-primary" onClick={() => navigate("/resgister")}>
           Começar agora
         </button>
       </BaseCard>

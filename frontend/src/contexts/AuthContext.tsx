@@ -6,6 +6,7 @@ type AuthContextType = {
   user: any;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
+  register: (email: string, password: string) => Promise<void>;
   logout: () => void;
 };
 
@@ -16,7 +17,6 @@ export function AuthProvider({ children }: any) {
   const [token, setToken] = useState<string | null>(null);
 
   async function login(email: string, password: string) {
-
     if (ENV.DISABLE_AUTH) {
       setUser({
         name: "Maria",
@@ -43,10 +43,54 @@ export function AuthProvider({ children }: any) {
     setToken(token);
   }
 
-  function logout() {
-    localStorage.removeItem("token");
-    setUser(null);
+  async function register(email: string, password: string) {
+    try {
+      if (ENV.DISABLE_AUTH) {
+        setUser({
+          name: "Maria",
+          email,
+        });
+        return;
+      }
+
+      const response = await api.post("/auth/register", {
+        email,
+        password,
+      });
+
+      /**
+       * Existem 2 cenários comuns:
+       * 1. API já retorna token + user (igual login)
+       * 2. API só cria e você precisa logar depois
+       */
+
+      const { token, user } = response.data;
+
+      // 👉 Caso sua API já devolva token
+      if (token) {
+        localStorage.setItem("token", token);
+        api.defaults.headers.Authorization = `Bearer ${token}`;
+
+        setUser(user);
+        setToken(token);
+      } else {
+        // 👉 Caso NÃO devolva token → faz login automático
+        await login(email, password);
+      }
+    } catch (error: any) {
+      console.error("Erro no register:", error);
+
+      throw new Error(
+        error?.response?.data?.message || "Erro ao registrar usuário",
+      );
+    }
   }
+
+  function logout() {
+  localStorage.removeItem("token");
+  delete api.defaults.headers.Authorization;
+  setUser(null);
+}
 
   // 🔄 persistência ao recarregar
   useEffect(() => {
@@ -68,7 +112,7 @@ export function AuthProvider({ children }: any) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

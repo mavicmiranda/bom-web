@@ -2,6 +2,8 @@
 
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Kanban from "../../components/Kanban";
+import CenteredContainer from "../../components/layout/CenteredContainer";
 
 export default function Home() {
   const { user, logout } = useAuth();
@@ -14,11 +16,6 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <h1>Minha Home</h1>
-      <p>Bem-vinda ao sistema 🚀</p>
-      <h1>Bem-vinda {user?.email}</h1>
-      <button onClick={handleLogout}>Sair</button>
-    </div>
+      <Kanban/>
   );
 }
